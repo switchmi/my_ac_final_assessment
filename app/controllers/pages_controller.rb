@@ -4,6 +4,5 @@ class PagesController < ApplicationController
     @note = Note.new
     @notes = Note.all
     @followee_notes = current_user.feed
-
   end
 end

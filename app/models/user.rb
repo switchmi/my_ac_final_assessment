@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :followers, through: :follower_users
   has_many :followee_users, class_name: 'Following', foreign_key: :follower_id
   has_many :followees, through: :followee_users
+  has_many :likes
+  has_many :note_likes, through: :likes
 
 
    def self.from_omniauth(auth)

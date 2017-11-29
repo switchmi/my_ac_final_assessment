@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users
   resources :notes
   resources :followings, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
 end

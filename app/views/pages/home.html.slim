@@ -37,6 +37,15 @@ h1 ForeverNotes
           hr
           h4 = "#{note.title}"
           p = "#{note.body}"
+          - if note.user_likes.include?(current_user)
+            = simple_form_for note, url: like_path(note.id) , method: :delete do |f|
+              = hidden_field_tag :id, value: note.id
+              = f.submit "Unlike", class: "btn btn-primary"
+          - else
+            = simple_form_for note, url: likes_path, method: :post do |f|
+              = hidden_field_tag :user_id, current_user.id
+              = hidden_field_tag :note_id, note.id
+              = f.submit "Like", class: "btn btn-primary"
     - else
       - @notes.each do |note|
         .note-box
