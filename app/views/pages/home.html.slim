@@ -1,1 +1,23 @@
-h1 Homepage!
+h1 ForeverNotes
+-if current_user
+  .container
+    = simple_form_for @note, url:notes_path, method: :post do |f|
+      = f.input :title
+      = f.input :body
+      = f.button :submit
+
+.container.d-flex
+  .user-list.col-4
+    h2 User List
+    ul
+    - @users.each do |user|
+      li = user.name
+
+  .notes-body.col-8
+    h2 Notes
+    - @notes.each do |note|
+      .note-box
+        h3 = "#{note.user.name} wrote:"
+        hr
+        h4 = "#{note.title}"
+        p = "#{note.body}"

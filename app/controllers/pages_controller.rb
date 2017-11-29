@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!
   def home
+    @users = User.all
+    @note = Note.new
+    @notes = Note.all
   end
 end
