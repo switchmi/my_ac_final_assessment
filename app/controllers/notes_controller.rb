@@ -5,6 +5,7 @@ class NotesController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path
+      flash[:alert] = 'Cannot be blank!'
     end
   end
 
@@ -18,6 +19,7 @@ class NotesController < ApplicationController
       redirect_to root_path
     else
       render :edit
+      flash[:alert] = 'Cannot be blank!'
     end
   end
 
