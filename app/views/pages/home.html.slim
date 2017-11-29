@@ -11,15 +11,38 @@ h1 ForeverNotes
     h2 User List
     ul
     - @users.each do |user|
-      li = user.name
+      - unless current_user == user
+        li
+          = link_to user.name, user_path(user.id)
+          - if current_user
+            - if current_user.following?user
+              = simple_form_for user, url: following_path(user) , method: :delete do |f|
+                = hidden_field_tag :id, value: user.id
+                = f.submit "Unfollow", class: "btn btn-primary"
+            - else
+              = simple_form_for user, url: followings_path , method: :post do |f|
+                = hidden_field_tag :followee_id, user.id
+                = f.submit "Follow", class: "btn btn-primary"
+
+
 
   .notes-body.col-8
     h2 Notes
-    - @notes.each do |note|
-      .note-box
-        h3 = "#{note.user.name} wrote:"
-        p.btn = link_to "Edit",edit_note_path(note.id), method: :get if current_user
-        p.btn = link_to "Delete",note_path(note.id), method: :delete if current_user
-        hr
-        h4 = "#{note.title}"
-        p = "#{note.body}"
+    - if current_user
+      - @followee_notes.each do |note|
+        .note-box
+          h3 = "#{note.user.name} wrote:"
+          p.btn = link_to "Edit",edit_note_path(note.id), method: :get if current_user == note.user
+          p.btn = link_to "Delete",note_path(note.id), method: :delete if current_user == note.user
+          hr
+          h4 = "#{note.title}"
+          p = "#{note.body}"
+    - else
+      - @notes.each do |note|
+        .note-box
+          h3 = "#{note.user.name} wrote:"
+          p.btn = link_to "Edit",edit_note_path(note.id), method: :get if current_user
+          p.btn = link_to "Delete",note_path(note.id), method: :delete if current_user
+          hr
+          h4 = "#{note.title}"
+          p = "#{note.body}"

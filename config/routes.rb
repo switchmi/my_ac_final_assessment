@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :users
   resources :notes
+  resources :followings, only: [:create, :destroy]
 end
