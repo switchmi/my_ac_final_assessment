@@ -18,6 +18,8 @@ h1 ForeverNotes
     - @notes.each do |note|
       .note-box
         h3 = "#{note.user.name} wrote:"
+        p.btn = link_to "Edit",edit_note_path(note.id), method: :get if current_user
+        p.btn = link_to "Delete",note_path(note.id), method: :delete if current_user
         hr
         h4 = "#{note.title}"
         p = "#{note.body}"
