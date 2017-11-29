@@ -1,6 +1,6 @@
 h1 ForeverNotes
 -if current_user
-  .container
+  .container.note-form
     = simple_form_for @note, url:notes_path, method: :post do |f|
       = f.input :title
       = f.input :body
@@ -13,7 +13,7 @@ h1 ForeverNotes
     - @users.each do |user|
       - unless current_user == user
         li
-          = link_to user.name, user_path(user.id)
+          = user.name
           - if current_user
             - if current_user.following?user
               = simple_form_for user, url: following_path(user) , method: :delete do |f|

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :followees, through: :followee_users
   has_many :likes
   has_many :note_likes, through: :likes
+  validates :name, presence: true
+  validates :email, presence: true
 
 
    def self.from_omniauth(auth)

@@ -13,9 +13,18 @@
  *= require_tree .
  *= require_self
  */
-div{
-  border: 1px dotted red;
+.note-form{
+  border: 1px solid black;
 }
  .user-list{
    border: 1px solid black;
+ }
+
+ .notes-body {
+   border: 1px solid black;
+ }
+
+ .note-box{
+   border: 1px solid black;
+
  }

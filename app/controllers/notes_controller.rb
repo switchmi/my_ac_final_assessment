@@ -4,7 +4,7 @@ class NotesController < ApplicationController
     if @note.save
       redirect_to root_path
     else
-      render 'pages/home'
+      redirect_to root_path
     end
   end
 
